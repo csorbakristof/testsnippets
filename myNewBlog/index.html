@@ -18,24 +18,21 @@ layout: default
   {% capture allTags %}
   {% for p in site.pages %} {% for t in p.tags %} {{t}} {% endfor %} {% endfor %}
   {% endcapture %}
+  {% assign allTagsArray = allTags | split : ' ' | sort %}
 
   <h1 class="page-heading">Snippetek címkék szerint</h1>
 
-{% for tag in site.tags %}
-  {% assign t = tag | first %}
-  {% assign pages = tag | last %}
-
-{{ t | downcase }}
-<ul>
-{% for page in pages %}
-  (url {{page.url}} url)
-  {% if page.tags contains t %}
-  <li>
-    <a href="{{ page.url }}">{{ page.title }} {{page.authors}} {{page.tags}}</a>
-  </li>
-  {% endif %}
-{% endfor %}
-</ul>
+{% for tag in allTagsArray %}
+  Tag: {{ tag }} <br/>
+  <ul>
+  {% for page in site.pages %}
+    {% if page.tags contains tag %}
+    <li>
+      <a href="{{ page.url }}">{{ page.title }}</a> {{page.tags}} ({{page.authors}})
+    </li>
+    {% endif %}
+  {% endfor %}
+  </ul>
 {% endfor %}
 
   <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
