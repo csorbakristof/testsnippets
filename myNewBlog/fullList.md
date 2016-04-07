@@ -1,16 +1,15 @@
 ---
 layout: default
+permalink: /fullList.html
 ---
 
 <div class="home">
   <h1 class="page-heading">Minden snippet</h1>
   <ul class="post-list">
-    {% for post in site.posts %}
+    {% for page in site.pages %}
       <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
         <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          <a class="post-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }} (author: {{page.authors}}, tags: {{page.tags}})</a>
         </h2>
       </li>
     {% endfor %}
