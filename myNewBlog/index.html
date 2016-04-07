@@ -8,10 +8,6 @@ layout: default
 
   <h1 class="page-heading">Minden címke</h1>
 
-  {% for tag in site.tags %}
-    {% assign t = tag | first %}
-    <a href="#{{t}}">{{t}}</a>
-  {% endfor %}
 
   <h1 class="page-heading">Minden PAGE címke</h1>
 
@@ -20,10 +16,14 @@ layout: default
   {% endcapture %}
   {% assign allTagsArray = allTags | split : ' ' | sort %}
 
+  {% for t in allTagsArray %}
+    <a href="#{{t}}">{{t}}</a>
+  {% endfor %}
+
   <h1 class="page-heading">Snippetek címkék szerint</h1>
 
 {% for tag in allTagsArray %}
-  Tag: {{ tag }} <br/>
+  <h2 id="{{tag}}">{{tag}}</h2><br/>
   <ul>
   {% for page in site.pages %}
     {% if page.tags contains tag %}
